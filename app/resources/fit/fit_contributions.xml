@@ -1,0 +1,27 @@
+<resources>
+    <!--
+        How the developer fields are shown in Garmin Connect. Ids must match
+        FitIds in source/Recorder.mc. The win_hdr / win_data arrays (ids 3, 4)
+        carry raw stroke windows for tools/fit_probe.py and are not displayed.
+    -->
+    <fitContributions>
+        <fitField id="1" displayInChart="true" sortOrder="0" precision="0"
+            chartTitle="@Strings.FitGyroPeakChart" dataLabel="@Strings.FitGyroPeak"
+            unitLabel="@Strings.FitDegPerSec" fillColor="#E8590C" />
+        <fitField id="0" displayInChart="true" sortOrder="1" precision="0"
+            chartTitle="@Strings.FitLabelChart" dataLabel="@Strings.FitLabel"
+            unitLabel="@Strings.FitNoUnit" fillColor="#1C7ED6" />
+        <fitField id="5" displayInActivityLaps="true" sortOrder="2" precision="0"
+            dataLabel="@Strings.FitLabel" unitLabel="@Strings.FitNoUnit" />
+        <fitField id="6" displayInActivitySummary="true" sortOrder="3" precision="0"
+            dataLabel="@Strings.FitTotalStrokes" unitLabel="@Strings.FitStrokesUnit" />
+        <fitField id="10" displayInActivitySummary="true" sortOrder="4" precision="0"
+            dataLabel="@Strings.FitGyroMax" unitLabel="@Strings.FitDegPerSec" />
+        <fitField id="8" displayInActivitySummary="true" sortOrder="5" precision="0"
+            dataLabel="@Strings.FitAccRate" unitLabel="@Strings.FitHz" />
+        <fitField id="9" displayInActivitySummary="true" sortOrder="6" precision="0"
+            dataLabel="@Strings.FitGyroRate" unitLabel="@Strings.FitHz" />
+        <fitField id="7" displayInActivitySummary="true" sortOrder="7" precision="0"
+            dataLabel="@Strings.FitDropped" unitLabel="@Strings.FitNoUnit" />
+    </fitContributions>
+</resources>

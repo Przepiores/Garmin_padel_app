@@ -1,0 +1,47 @@
+<strings>
+    <string id="AppName">Padel Probe</string>
+
+    <string id="LabelNone">Bez etykiety</string>
+    <string id="LabelSmash">Smash</string>
+    <string id="LabelBandeja">Bandeja</string>
+    <string id="LabelVibora">Víbora</string>
+    <string id="LabelOther">Inne uderzenie</string>
+    <string id="LabelNotStroke">Nie-uderzenie</string>
+
+    <string id="StatusIdle">START: nagrywaj</string>
+    <string id="StatusRec">NAGR. $1$</string>
+    <string id="StatusPaused">PAUZA $1$</string>
+    <string id="StatusSaved">Zapisano</string>
+    <string id="StatusDiscarded">Odrzucono</string>
+
+    <string id="AccLine">Akc. $1$ Hz (max $2$)</string>
+    <string id="GyroLine">Żyro $1$ Hz (max $2$)</string>
+    <string id="GyroMaxLine">Obrót $1$ °/s, oś $2$</string>
+    <string id="AccMaxLine">Akc. max $1$ g</string>
+    <string id="StrokesLine">Uderzenia $1$, kolejka $2$</string>
+    <string id="LoggerLine">Logger $1$, HR $2$</string>
+    <string id="On">wł.</string>
+    <string id="Off">wył.</string>
+
+    <string id="SaveTitle">Pauza</string>
+    <string id="MenuResume">Wznów</string>
+    <string id="MenuSave">Zapisz</string>
+    <string id="MenuDiscard">Odrzuć</string>
+    <string id="QueueWarning">$1$ wycinków niezapisanych</string>
+    <string id="SettingsTitle">Ustawienia</string>
+    <string id="SettingLogger">Logger czujników FIT</string>
+
+    <string id="FitLabel">Etykieta</string>
+    <string id="FitLabelChart">Etykieta uderzenia</string>
+    <string id="FitGyroPeak">Szczyt obrotu</string>
+    <string id="FitGyroPeakChart">Szczyt obrotu nadgarstka</string>
+    <string id="FitDegPerSec">°/s</string>
+    <string id="FitNoUnit">#</string>
+    <string id="FitTotalStrokes">Wykryte uderzenia</string>
+    <string id="FitStrokesUnit">uderzeń</string>
+    <string id="FitGyroMax">Maks. obrót</string>
+    <string id="FitAccRate">Częstotl. akcelerometru</string>
+    <string id="FitGyroRate">Częstotl. żyroskopu</string>
+    <string id="FitHz">Hz</string>
+    <string id="FitDropped">Utracone wycinki</string>
+</strings>

@@ -1,0 +1,47 @@
+<strings>
+    <string id="AppName">Padel Probe</string>
+
+    <string id="LabelNone">No label</string>
+    <string id="LabelSmash">Smash</string>
+    <string id="LabelBandeja">Bandeja</string>
+    <string id="LabelVibora">Víbora</string>
+    <string id="LabelOther">Other stroke</string>
+    <string id="LabelNotStroke">Not a stroke</string>
+
+    <string id="StatusIdle">START: record</string>
+    <string id="StatusRec">REC $1$</string>
+    <string id="StatusPaused">PAUSED $1$</string>
+    <string id="StatusSaved">Saved</string>
+    <string id="StatusDiscarded">Discarded</string>
+
+    <string id="AccLine">Acc $1$ Hz (max $2$)</string>
+    <string id="GyroLine">Gyro $1$ Hz (max $2$)</string>
+    <string id="GyroMaxLine">Rot $1$ °/s, axis $2$</string>
+    <string id="AccMaxLine">Acc max $1$ g</string>
+    <string id="StrokesLine">Strokes $1$, queue $2$</string>
+    <string id="LoggerLine">Logger $1$, HR $2$</string>
+    <string id="On">on</string>
+    <string id="Off">off</string>
+
+    <string id="SaveTitle">Paused</string>
+    <string id="MenuResume">Resume</string>
+    <string id="MenuSave">Save</string>
+    <string id="MenuDiscard">Discard</string>
+    <string id="QueueWarning">$1$ windows not written</string>
+    <string id="SettingsTitle">Settings</string>
+    <string id="SettingLogger">FIT sensor logger</string>
+
+    <string id="FitLabel">Label</string>
+    <string id="FitLabelChart">Stroke label</string>
+    <string id="FitGyroPeak">Rotation peak</string>
+    <string id="FitGyroPeakChart">Wrist rotation peak</string>
+    <string id="FitDegPerSec">deg/s</string>
+    <string id="FitNoUnit">#</string>
+    <string id="FitTotalStrokes">Detected strokes</string>
+    <string id="FitStrokesUnit">strokes</string>
+    <string id="FitGyroMax">Max rotation</string>
+    <string id="FitAccRate">Accelerometer rate</string>
+    <string id="FitGyroRate">Gyroscope rate</string>
+    <string id="FitHz">Hz</string>
+    <string id="FitDropped">Dropped windows</string>
+</strings>

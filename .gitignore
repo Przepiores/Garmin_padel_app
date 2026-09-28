@@ -1,0 +1,14 @@
+# Connect IQ build output
+app/bin/
+*.prg
+*.prg.debug.xml
+*.iq
+
+# Developer signing key: never commit
+*.der
+*.pem
+developer_key*
+
+# Python
+__pycache__/
+.venv/

@@ -130,33 +130,52 @@ względna, dobra do porównań między uderzeniami, a nie prędkość piłki.
 - próg pewności klasyfikacji (suwak z rozsądną wartością domyślną),
 - język: automatycznie według zegarka (PL/EN).
 
-## 7. Do sprawdzenia na początku (spike techniczny)
-To są założenia, które trzeba potwierdzić na prawdziwym Epix Pro, zanim
-zaczniemy budować resztę:
+## 7. Spike techniczny: aplikacja Padel Probe
+Założenia do potwierdzenia na prawdziwym Epix Pro, zanim zbudujemy resztę.
+Służy do tego aplikacja testowa w `app/`
+(instrukcja: [INSTALACJA_WINDOWS.md](INSTALACJA_WINDOWS.md),
+test: [PLAN_TESTU.md](PLAN_TESTU.md)).
 
-1. **Częstotliwość próbkowania i żyroskop**: jaką maksymalną częstotliwość
-   i jakie osie żyroskopu zwraca `Toybox.Sensor` na Epix Pro.
-2. **Eksport danych treningowych na komputer**: kandydaci do porównania:
-   - A: plik logu aplikacji zapisywany na zegarku i kopiowany przez USB
-     (działa dla aplikacji wgranych ręcznie),
-   - B: pola danych FIT w aktywności pobieranej z Garmin Connect,
-   - C: wysyłka przez telefon (`makeWebRequest`).
-   Trzeba sprawdzić limity rozmiaru każdej z opcji.
-3. **Typ aktywności**: czy API Connect IQ na tym zegarku pozwala zapisać
-   sesję jako padel lub sport rakietowy.
-4. **Limity pól FIT**: ile pól danych i bajtów może zapisać aplikacja
-   Connect IQ.
+Stan wiedzy z dokumentacji Connect IQ (wrzesień 2026):
+
+1. **Częstotliwość próbkowania i żyroskop**. Epix Pro (Gen 2) obsługuje
+   `Sensor.registerSensorDataListener` z akcelerometrem (mili-g) i
+   żyroskopem (°/s). Maksimum zwraca
+   `getMaxSampleRateForSensorType()`, a jego wartość sprawdzamy na zegarku.
+   Sprawdzamy też nasycenie żyroskopu przy smashu.
+2. **Eksport danych treningowych na komputer**:
+   - ~~A: plik logu przez USB~~. Odrzucone: logi na zegarku są obcinane do
+     ok. 5 KB (maks. ok. 10 KB z kopią `.BAK`).
+   - **B1: `SensorLogging.SensorLogger`** zapisuje surowy akcelerometr
+     i żyroskop do pliku FIT aktywności. Według forum tylko ok. 25 Hz,
+     a znaczniki czasu bywają błędne. Do sprawdzenia.
+   - **B2: wycinki w polach deweloperskich FIT**. Zegarek sam wykrywa
+     uderzenie przy pełnej częstotliwości i zapisuje ok. 0,8 s sygnału wokół
+     niego, porcjami po 112 wartości, bo aplikacja ma limit **256 B na
+     rekord**, a rekord powstaje co 1 s. Jedno uderzenie przy 100 Hz zajmuje
+     ok. 6 s zapisu. Wymaga zapisu „co sekundę” zamiast „Smart”.
+   - C: wysyłka przez telefon (`makeWebRequest`). Rezerwa, jeśli B zawiedzie.
+3. **Typ aktywności**: od API 4.1.6 jest `Activity.SPORT_RACKET` (64)
+   z `SUB_SPORT_PADEL` (85). Aplikacja ich używa, a zapis w Garmin Connect
+   sprawdzamy.
+4. **Limity pól FIT**: 256 B na komunikat dla aplikacji. `setData()`
+   wywołane przed zapisem rekordu nadpisuje poprzednią wartość.
 5. **Wolumen danych**: na start ok. 50–100 oznaczonych uderzeń na klasę
    i osobno nagrania „nie-uderzeń”.
 
-## 8. Proponowana struktura repozytorium
+Konsekwencja dla docelowej aplikacji: detekcja uderzeń i tak musi działać na
+zegarku w czasie rzeczywistym, więc detektor z Padel Probe będzie podstawą
+trybu meczu.
+
+## 8. Struktura repozytorium
 ```
-app/            # aplikacja Connect IQ (Monkey C)
+app/            # aplikacja Connect IQ (Monkey C); obecnie Padel Probe (spike)
   manifest.xml
   monkey.jungle
-  source/       # widoki, nagrywanie, detekcja, cechy, klasyfikator
-  resources/    # stringi PL/EN, ustawienia, ikony
-tools/          # Python: parsowanie danych, trening, eksport modelu do Monkey C
-data/           # oznaczone nagrania (raczej poza gitem, jeśli urosną)
-docs/           # specyfikacja i notatki
+  source/       # nagrywanie, czujniki, detekcja, zapis wycinków, UI
+  resources/    # stringi EN (domyślne), pola FIT, ikona
+  resources-pol/ # stringi PL
+tools/          # Python: parser FIT (fit_probe.py), później trening modelu
+data/           # oznaczone nagrania (.fit), opcjonalnie
+docs/           # specyfikacja, instalacja, plan testu
 ```
