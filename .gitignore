@@ -12,3 +12,6 @@ developer_key*
 # Python
 __pycache__/
 .venv/
+
+# Local secrets (e.g. OPENROUTER_API_KEY)
+.env
