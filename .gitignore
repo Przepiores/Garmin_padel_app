@@ -12,3 +12,6 @@ developer_key*
 # Python
 __pycache__/
 .venv/
+
+# Claude Code: znacznik startu sesji zdalnej
+.claude/.session_base

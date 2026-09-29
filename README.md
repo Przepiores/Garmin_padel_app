@@ -17,6 +17,7 @@ plik.
 - [Specyfikacja](docs/SPECYFIKACJA.md)
 - [Instalacja na Windowsie i wgranie na zegarek](docs/INSTALACJA_WINDOWS.md)
 - [Plan testu na korcie](docs/PLAN_TESTU.md)
+- [Testy na sprzęcie (kolejka z sesji zdalnych)](docs/TESTY_NA_SPRZECIE.md)
 
 ## Testy parsera
 
