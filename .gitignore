@@ -12,3 +12,8 @@ developer_key*
 # Python
 __pycache__/
 .venv/
+
+# Gemini image skill: API key and outputs stay local
+.claude/skills/gemini-image/api_key
+generated/
+*.skill.zip
