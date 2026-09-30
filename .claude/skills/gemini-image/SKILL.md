@@ -77,13 +77,42 @@ rozpoznawalnych osób w sytuacjach, które mogłyby wprowadzać w błąd.
 |---|---|
 | `no API key` | poproś o klucz (sekcja 1) |
 | `HTTP 400 ... API key not valid` | klucz błędny, nowy z aistudio.google.com/apikey |
-| `HTTP 429 ... limit: 0` | modele obrazowe nie są w darmowym tierze: trzeba włączyć billing projektu klucza w AI Studio. Powiedz to wprost, nie ponawiaj |
+| `HTTP 429 ... limit: 0` | modele obrazowe nie są w darmowym tierze: trzeba włączyć billing projektu klucza w AI Studio. Nie ponawiaj, przejdź do sekcji 6 (fallback) |
 | `HTTP 429` (bez `limit: 0`) | chwilowy limit: odczekaj ~30 s, ponów raz |
 | `HTTP 403` bez treści JSON / `network` | sieć środowiska blokuje `generativelanguage.googleapis.com`. W czacie claude.ai: Ustawienia → Capabilities → Code execution → dodaj tę domenę do dozwolonych (lub „All domains"). W Claude Code na webie: ustawienia sieci środowiska |
 | `HTTP 404` | zła nazwa modelu; sprawdź `-m` |
 | `no image` | filtr bezpieczeństwa albo odpowiedź tekstowa (pole `text`): przeformułuj prompt |
 
-## 6. Serie i warianty
+## 6. Fallback, gdy Gemini API nie działa
+
+Przechodź na fallback tylko przy błędach, których ponowienie nie naprawi:
+`429 ... limit: 0`, `429` po jednym ponowieniu, `403` z informacją o billingu
+lub wyłączonym API, błąd sieci. Przy błędnym kluczu (`400 API key not valid`)
+najpierw poproś o poprawny klucz. W jednym zdaniu powiedz użytkownikowi, dlaczego
+zmieniasz drogę (np. „Skończył się limit/środki w Gemini API, generuję przez Canvę”).
+
+**Sesja desktop (Claude Desktop / Cowork na komputerze użytkownika, z dostępem
+do przeglądarki Brave i terminala Windows):** użyj skilla `img-generation`
+(AI Studio w Brave, model `gemini-3.1-flash-lite-image` bez opłat). Ten sam
+prompt po angielsku.
+
+**Każda inna sesja (czat claude.ai, Claude Code na webie, chmura):** Canva.
+1. `generate-image` z connectora Canva: `prompt` (ten sam, po angielsku),
+   opcjonalnie `aspectRatio` jako enum (`16:9` → `LANDSCAPE_16_9`, `1:1` →
+   `SQUARE_1_1`, `9:16` → `PORTRAIT_9_16`, `4:5` → `PORTRAIT_4_5` itd.).
+   Przy edycji obrazu użytkownika: najpierw `create-upload-url`, wgraj plik,
+   potem podaj `mediaId` w `imageReferences` jako `{type: "MEDIA", id}`.
+2. Jeśli nie pojawił się widget z obrazem: odpytuj `get-generate-image-job`
+   z tym samym `jobId`, aż status będzie `SUCCESS` lub `FAILURE`. Nie startuj
+   nowego zadania tylko dlatego, że stare jest `PENDING`.
+3. Przy `SUCCESS` pokaż obraz i dołącz link „Open generated image” zwrócony
+   przez Canvę.
+
+Jeśli connector Canva nie jest dostępny w sesji, powiedz wprost, że generowanie
+stoi na Gemini API, i podaj, co trzeba zrobić (billing/klucz), zamiast próbować
+innych obejść.
+
+## 7. Serie i warianty
 
 Kilka wariantów: kilka niezależnych wywołań z różnymi nazwami plików (można
 równolegle). Spójna seria (ta sama postać, ten sam styl): pierwszy obraz
